@@ -48,6 +48,11 @@ public class Battery
     {
         return chargeLevel;
     }
+    
+    public long getChargeTop()
+    {
+        return this.CHARGE_TOP;
+    }
 
     /**
      * Utilisation de la batterie pour realiser une tache necessitant de
@@ -63,7 +68,8 @@ public class Battery
         {
             throw new InsufficientChargeException();
         }
-        chargeLevel = (float) energy;
+        // chargeLevel = (float) energy;
+        chargeLevel -= (float) energy;
     }
 
     /**

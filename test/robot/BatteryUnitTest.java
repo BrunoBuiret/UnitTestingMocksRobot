@@ -1,7 +1,5 @@
 package robot;
 
-import java.util.Timer;
-import java.util.TimerTask;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
@@ -20,9 +18,22 @@ public class BatteryUnitTest
         Battery cell = new Battery();
         
         // Run assertions
-        assertEquals(100f, cell.getChargeLevel(), 0);
+        assertEquals(
+            "The battery's charge level should have been equal to the one set in " +
+            "the constructor.",
+            100f,
+            cell.getChargeLevel(),
+            0);
+        
         cell.charge();
-        assertEquals(111f, cell.getChargeLevel(), 0);
+        
+        assertEquals(
+            "The battery's charge level should have been equal to the computed value " +
+            "of the initial value.",
+            111f,
+            cell.getChargeLevel(),
+            0
+        );
     }
     
     /**
@@ -37,17 +48,27 @@ public class BatteryUnitTest
         // Run assertions
         cell.setUp();
         
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask()
+        try
         {
-            //definition de la tache a accomplir
-            @Override
-            public void run()
-            {
-                System.out.print("In TimerTask");
-                assertEquals(111f, cell.getChargeLevel(), 0);
-            }
-        }, 1005);
+            // Wait
+            Thread.sleep(cell.getChargeTop());
+            
+            // Then, assert
+            assertEquals(
+                "The battery's charge level should have been more or less equal " +
+                "to the computed value of the initial value.",
+                111f,
+                cell.getChargeLevel(),
+                20
+            );
+        }
+        catch(InterruptedException ex)
+        {
+            AssertionError error = new AssertionError("Couldn't method setUp().");
+            error.addSuppressed(ex);
+            
+            throw error;
+        }
     }
 
     /**
@@ -67,7 +88,14 @@ public class BatteryUnitTest
         
         // Run assertions
         cell.use(energy);
-        assertEquals(50f, cell.getChargeLevel(), 0);
+        
+        assertEquals(
+            "The battery's charge level should have been decreased by the amount " +
+            "of used energy.",
+            50f,
+            cell.getChargeLevel(),
+            0
+        );
     }
     
     /**
@@ -101,6 +129,10 @@ public class BatteryUnitTest
         Battery cell = new Battery();
         
         // Run assertions
-        assertEquals(2000, cell.timeToSufficientCharge(120f));
+        assertEquals(
+            "The computed time of wait isn't valid for the given charge level.",
+            2000,
+            cell.timeToSufficientCharge(120f)
+        );
     }
 }

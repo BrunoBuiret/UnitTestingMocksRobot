@@ -31,6 +31,7 @@ public class LandSensor
 
     public double distance(Coordinates coordinate1, Coordinates coordinate2)
     {
-        return Math.sqrt(Math.pow(coordinate1.getX() - coordinate2.getX(), 2) + Math.pow(coordinate1.getX() - coordinate2.getX(), 2));
+        // return Math.sqrt(Math.pow(coordinate1.getX() - coordinate2.getX(), 2) + Math.pow(coordinate1.getX() - coordinate2.getX(), 2));
+        return Math.sqrt(Math.pow(coordinate1.getX() - coordinate2.getX(), 2) + Math.pow(coordinate1.getY() - coordinate2.getY(), 2));
     }
 }
