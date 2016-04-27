@@ -33,9 +33,9 @@ public class LandSensorUnitTest
         this.coordinatesList.add(new Coordinates(-1, -8));
         
         this.coordinatesList.add(new Coordinates(0, 9));
-        this.coordinatesList.add(new Coordinates(0, -10));
-        this.coordinatesList.add(new Coordinates(13, 0));
-        this.coordinatesList.add(new Coordinates(-12, 0));
+        this.coordinatesList.add(new Coordinates(0, -4));
+        this.coordinatesList.add(new Coordinates(7, 0));
+        this.coordinatesList.add(new Coordinates(-3, 0));
     }
     
     /**
